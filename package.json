@@ -1,20 +1,32 @@
 {
-  "name": "react-min",
+  "name": "react-nimble",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Minimal starter for hacking",
+  "author": {
+    "name": "Daniel James Williams",
+    "email": "mail@danielwilliams.us"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/daniel-williams/react-nimble"
+  },
   "scripts": {
     "start": "npm run dev",
     "dev": "cross-env NODE_ENV=dev npm run webpack-dev-server",
     "remote": "cross-env NODE_ENV=remote npm run webpack-dev-server",
     "build:stag": "cross-env NODE_ENV=staging npm run webpack-build",
     "build:prod": "cross-env NODE_ENV=production npm run webpack-build",
-    "webpack-build": "rimraf dist && webpack --config config/webpack.production.js --progress --profile --bail",
+    "webpack-build": "rimraf dist && webpack --config config/webpack.build.js --progress --profile --bail",
     "webpack-dev-server": "webpack-dev-server --config config/webpack.dev.js --progress --profile --watch --content-base client/"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "React",
+    "seed",
+    "starter",
+    "Typescript",
+    "Webpack"
+  ],
+  "license": "MIT",
   "dependencies": {
     "react": "^16.0.0",
     "react-dom": "^16.0.0"
@@ -23,8 +35,10 @@
     "@types/react": "^16.0.7",
     "@types/react-dom": "^15.5.5",
     "awesome-typescript-loader": "^3.2.3",
+    "copy-webpack-plugin": "^4.1.0",
     "cross-env": "^5.0.5",
     "html-webpack-plugin": "^2.30.1",
+    "rimraf": "^2.6.2",
     "source-map-loader": "^0.2.2",
     "typescript": "^2.5.3",
     "webpack": "^3.6.0",
