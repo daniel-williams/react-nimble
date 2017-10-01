@@ -4,7 +4,8 @@ var helpers = require('./helpers');
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 
-var CopyWebpackPlugin = require('copy-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const ENV = process.env.ENV = process.env.NODE_ENV || 'production';
 const HOST = process.env.HOST || 'localhost';
@@ -17,6 +18,9 @@ const METADATA = {
   ENV: ENV
 };
 
+const extractSass = new ExtractTextPlugin({
+  filename: "[name].[contenthash].css"
+});
 
 module.exports = function (options) {
   return webpackMerge(commonConfig({env: ENV}), {
@@ -27,7 +31,23 @@ module.exports = function (options) {
       sourceMapFilename: '[file].map',
       chunkFilename: '[id].[chunkhash].chunk.js'
     },
+    module: {
+      loaders: [
+        {
+          test: /\.scss$/,
+          use: extractSass.extract({
+            use: [
+              { loader: "css-loader" }, // translates CSS into CommonJS
+              { loader: "sass-loader" }, // compiles Sass to CSS
+            ],
+            // use style-loader in development
+            fallback: "style-loader"
+          }),
+        },
+      ],
+    },
     plugins: [
+      extractSass,
       new webpack.NoEmitOnErrorsPlugin(),
       new webpack.optimize.UglifyJsPlugin({
         compress: {

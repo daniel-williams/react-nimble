@@ -1,0 +1,15 @@
+$border-color: rgba(0, 0, 0, 0.2);
+$shadow-color: rgba(0, 0, 0, 0.1);
+
+.app-card {
+  position: relative;
+  padding: 20px;
+  border: 1px solid $border-color;
+  border-radius: 12px;
+  box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.1);
+
+  .title {
+    font-size: 30px;
+    line-height: 1.2;
+  }
+}
